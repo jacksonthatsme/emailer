@@ -1,0 +1,11 @@
+%h1
+  Emailer
+
+- @emails.each do |email|
+  %p
+    = email.name
+  %p
+    - email.blocks.each do |block|
+      %p
+        = block.content
+= link_to "New Email", new_email_path

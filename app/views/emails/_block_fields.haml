@@ -1,0 +1,5 @@
+.nested-fields.block
+  = f.label :content
+  = f.text_area :content
+  = hidden_field_tag :row_order, @block.row_order_position
+  = hidden_field_tag :type, :type
