@@ -3,9 +3,12 @@ class EmailsController < ApplicationController
     @emails = Email.all
   end
 
+  def show
+    @email = Email.find(params[:id])
+  end
+
   def new
     @email = Email.new
-    @block = Block.new
   end
   def create
     @email = Email.new(email_params)
@@ -17,16 +20,32 @@ class EmailsController < ApplicationController
     end
   end
 
-  def update_row_order
-    @block = Block.find(block_params[:id])
-    @block.row_order_position = block_params[:row_order_position]
-    @block.save
+  def edit
+    @email = Email.find(params[:id])
+  end
 
-    render nothing: true
+  def update
+    @email = Email.find(params[:id])
+
+    if @email.update(email_params)
+      redirect_to action: :index
+    else
+      render 'edit'
+    end
+  end
+
+  def preview
+    @email = Email.find(params[:id])
+    render 'show'
+  end
+
+  def output
+    @email = Email.find(params[:id])
+    render 'show'
   end
 
   private
     def email_params
-      params.require(:email).permit(:id, :_destroy, :name, :blocks_attributes => [:id, :_destroy, :row_order_position, :type, :content])
+      params.require(:email).permit(:id, :_destroy, :name, :blocks_attributes => [:id, :_destroy, :row_order_position, :block_type, :content_region_1, :content_region_2])
     end
 end

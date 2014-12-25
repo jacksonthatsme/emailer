@@ -1,0 +1,2 @@
+- @email.blocks.rank(:row_order).each do |block|
+  = render partial: "blocks/#{block.block_type}", locals: {block: block}

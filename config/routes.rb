@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   resources :emails do
-    post :update_row_order, on: :collection
-    resources :blocks do
-      post :update_row_order, on: :collection
+    member do
+      get 'preview'
+      get 'output'
     end
+    resources :blocks
   end
 
   root 'emails#index'

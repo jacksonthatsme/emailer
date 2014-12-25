@@ -1,11 +1,14 @@
-= form_for @email do |f|
+= form_for @email, id: "js-edit-email" do |f|
   = f.label :name
   = f.text_field :name
 
-  #sortable-blocks
+  #js-sortable-blocks
     = f.fields_for :blocks do |block|
-      = render 'blocks/block_fields', :f => block
-    .links
-      = link_to_add_association 'add block', f, :blocks
-  
+      = render "blocks/forms/#{block.block_type}", :f => block
+      .links
+        = link_to_add_association 'add standard block', f, :blocks, partial: "blocks/forms/standard"
+        = link_to_add_association 'add two column block', f, :blocks, partial: "blocks/forms/two_column"
+        = link_to_add_association 'add horizontal rule block', f, :blocks, partial: "blocks/forms/horizontal_rule"
+        = link_to_add_association 'add image block', f, :blocks, partial: "blocks/forms/image"
+
   = f.submit

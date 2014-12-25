@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207062443) do
+ActiveRecord::Schema.define(version: 20141225042546) do
 
   create_table "blocks", force: true do |t|
-    t.string   "type"
-    t.text     "content"
+    t.string   "block_type"
+    t.text     "content_region_1"
     t.integer  "email_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "row_order"
+    t.text     "content_region_2"
   end
 
   add_index "blocks", ["email_id"], name: "index_blocks_on_email_id"
